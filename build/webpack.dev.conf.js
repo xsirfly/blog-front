@@ -29,6 +29,7 @@ module.exports = merge(baseWebpackConfig, {
 })
 
 var pages = utils.getEntries('./src/module/**/*.html')
+console.log(pages)
 for(var page in pages) {
   // 配置生成的html文件，定义路径等
   var conf = {
@@ -43,6 +44,7 @@ for(var page in pages) {
       return (item != page)
     })
   }
+  console.log(conf)
   // 需要生成几个html文件，就配置几个HtmlWebpackPlugin对象
   module.exports.plugins.push(new HtmlWebpackPlugin(conf))
 }

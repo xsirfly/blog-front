@@ -1,7 +1,9 @@
 <template>
-	<vhead></vhead>
-	<vabout></vabout>
-	<vfoot></vfoot>
+	<div>
+		<vhead></vhead>
+		<vabout></vabout>
+		<vfoot></vfoot>
+	</div>
 </template>
 
 <script>
@@ -17,6 +19,7 @@ export default {
       vabout
     }
 }
+
 </script>
 
 <style>
