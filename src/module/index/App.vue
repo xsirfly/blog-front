@@ -1,7 +1,5 @@
 <template>
-	<div>
-		<preloader v-bind:show="preloaderShow"></preloader>
-	</div>
+	<preloader v-bind:show="preloaderShow"></preloader>
 </template>
 
 <script>
