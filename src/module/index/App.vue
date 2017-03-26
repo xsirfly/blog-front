@@ -26,6 +26,7 @@
 	};
 </script>
 
-<style>
-
+<style lang="scss" rel="stylesheet/scss">
+	@import "../../common/css/base.css";
+	@import "../../common/css/reset.css";
 </style>
