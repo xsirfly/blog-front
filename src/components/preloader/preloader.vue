@@ -9,7 +9,7 @@
 <script type="text/ecmascript-6">
     export default {
         props: ['show']
-    }
+    };
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
