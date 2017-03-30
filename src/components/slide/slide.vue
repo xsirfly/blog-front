@@ -1,7 +1,9 @@
 <template>
     <div class="slides-container">
-        <div v-for="item in slideItems" class="slide-item"
-             :style="item.style"></div>
+        <div class="slides" :style="[translateStyle, slidesWidth]">
+            <div class="slide-1 slide-item" :style="itemWidth"></div>
+            <div class="slide-2 slide-item" :style="itemWidth"></div>
+        </div>
         <nav class="slides-navigation">
             <a href="#" class="prev" @click="prev"></a>
             <a href="#" class="next" @click="next"></a>
@@ -13,20 +15,49 @@
     export default {
         data() {
             return {
-                currentPage: 0
+                currentPage: 0,
+                items: 2,
+                offestLeft: 0,
+                animation: '',
+                duration: 300,
+                screenWidth: 0
             };
         },
-        props: ['slideItems'],
         methods: {
             prev() {
-
+                console.log('prev');
+                let index = this.currentPage;
+                this.currentPage = index === 0 ? this.items : index - 1;
             },
             next() {
-
+                let index = this.currentPage;
+                this.currentPage = index === this.items - 1 ? 0 : index + 1;
             }
         },
-        mounted() {
-
+        computed: {
+            itemWidth() {
+                let itemWidth = 100 / this.items;
+                return {
+                    width: itemWidth.toFixed(2) + '%'
+                };
+            },
+            slidesWidth() {
+                return {
+                    width: this.items * 100 + '%'
+                };
+            },
+            translateStyle() {
+                let style = {};
+                style['transform'] = 'translateX(-' + this.currentPage * this.screenWidth + 'px)';
+                style['transitionTimingFunction'] = 'ease';
+                style['transitionDuration'] = this.duration + 'ms';
+                return style;
+            }
+        },
+        created () { // would work in 'ready', 'attached', etc.
+            window.addEventListener('load', () => {
+                this.screenWidth = this.$el.clientWidth;
+            });
         }
     };
 </script>
@@ -34,20 +65,32 @@
 <style lang="scss" rel="stylesheet/scss">
     @import "../../common/css/font-awesome.css";
     .slides-container{
-        width: 100%;
         height: 100%;
-        position: relative;
         &:hover{
-            .slides-container{
+            .slides-navigation{
                 a{
                     opacity: 0.3;
                 }
             }
         }
+        .slides{
+            height: 100%;
+        }
         .slide-item{
-            position: relative;
+            height: 100%;
             background-position: center center;
             background-attachment: fixed;
+            background-size: cover;
+            float: left;
+        }
+        .slide-1{
+            background-image: url("pattern-1.png"), url("slider-img-1.jpg");
+            background-repeat: repeat, no-repeat;
+        }
+
+        .slide-2{
+            background-image: url("pattern-1.png"), url("slider-img-2.jpg");
+            background-repeat: repeat, no-repeat;
         }
         .slides-navigation{
             width: 100%;
@@ -65,8 +108,6 @@
                 font-size: 32px;
                 font-weight: 400;
                 background: #000;
-                -webkit-border-radius: 24px;
-                -moz-border-radius: 24px;
                 border-radius: 24px;
                 &:hover{
                     opacity: .8 !important;

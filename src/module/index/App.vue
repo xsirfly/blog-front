@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="home">
 		<preloader v-bind:show="preloaderShow"></preloader>
 		<index></index>
 	</div>
@@ -21,7 +21,7 @@
 		created() {
 			setTimeout(() => {
 				this.preloaderShow = false;
-			}, 2000);
+			}, 200);
 		}
 	};
 </script>
@@ -29,4 +29,7 @@
 <style lang="scss" rel="stylesheet/scss">
 	@import "../../common/css/base.css";
 	@import "../../common/css/reset.css";
+	.home{
+		height: 100%;
+	}
 </style>

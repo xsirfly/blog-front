@@ -1,6 +1,4 @@
 /* Import Fonts */
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic);
-
 *, *::before, *::after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -311,7 +309,7 @@ Alert Boxes
 	display: block;
 	width: 12px;
 	height: 12px;
-	background: url(../images/close-btn-dark.png);
+	background: url(./images/close-btn-dark.png);
 	background-size: 12px 12px;
 	cursor: pointer;
 	opacity: 0.2;
