@@ -1,6 +1,6 @@
 <template>
     <div class="slides-container">
-        <div class="slides" :style="[translateStyle, slidesWidth]">
+        <div class="slides" :style="[translateStyle, slidesWidth]" @touchmove="ignore">
             <div class="slide-1 slide-item" :style="itemWidth"></div>
             <div class="slide-2 slide-item" :style="itemWidth"></div>
         </div>
@@ -25,14 +25,14 @@
         },
         methods: {
             prev() {
-                console.log('prev');
                 let index = this.currentPage;
                 this.currentPage = index === 0 ? this.items : index - 1;
             },
             next() {
                 let index = this.currentPage;
                 this.currentPage = index === this.items - 1 ? 0 : index + 1;
-            }
+            },
+            ignore() {}
         },
         computed: {
             itemWidth() {
@@ -54,8 +54,11 @@
                 return style;
             }
         },
-        created () { // would work in 'ready', 'attached', etc.
+        created() { // would work in 'ready', 'attached', etc.
             window.addEventListener('load', () => {
+                this.screenWidth = this.$el.clientWidth;
+            });
+            window.addEventListener('resize', () => {
                 this.screenWidth = this.$el.clientWidth;
             });
         }
@@ -65,7 +68,9 @@
 <style lang="scss" rel="stylesheet/scss">
     @import "../../common/css/font-awesome.css";
     .slides-container{
+        width: 100%;
         height: 100%;
+        position: relative;
         &:hover{
             .slides-navigation{
                 a{
@@ -75,22 +80,21 @@
         }
         .slides{
             height: 100%;
-        }
-        .slide-item{
-            height: 100%;
-            background-position: center center;
-            background-attachment: fixed;
-            background-size: cover;
-            float: left;
-        }
-        .slide-1{
-            background-image: url("pattern-1.png"), url("slider-img-1.jpg");
-            background-repeat: repeat, no-repeat;
-        }
+            .slide-item{
+                height: 100%;
+                background-position: center center;
+                background-size: cover;
+                float: left;
+            }
+            .slide-1{
+                background-image: url("pattern-1.png"), url("slider-img-1.jpg");
+                background-repeat: repeat, no-repeat;
+            }
 
-        .slide-2{
-            background-image: url("pattern-1.png"), url("slider-img-2.jpg");
-            background-repeat: repeat, no-repeat;
+            .slide-2{
+                background-image: url("pattern-1.png"), url("slider-img-2.jpg");
+                background-repeat: repeat, no-repeat;
+            }
         }
         .slides-navigation{
             width: 100%;

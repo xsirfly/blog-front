@@ -21,7 +21,7 @@
 		created() {
 			setTimeout(() => {
 				this.preloaderShow = false;
-			}, 200);
+			}, 2000);
 		}
 	};
 </script>
