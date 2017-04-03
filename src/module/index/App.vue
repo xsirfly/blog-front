@@ -1,13 +1,15 @@
 <template>
     <div class="home">
 		<preloader v-bind:show="preloaderShow"></preloader>
-		<index></index>
+        <slide></slide>
+		<slogon></slogon>
 	</div>
 </template>
 
 <script>
 	import preloader from '../../components/preloader/preloader';
-	import index from '../../components/index/index';
+	import slide from '../../components/slide/slide';
+	import slogon from '../../components/slogon/slogon';
 	export default {
 		data() {
 			return {
@@ -16,12 +18,13 @@
 		},
 		components: {
 			preloader,
-			index
+			slide,
+			slogon
 		},
 		created() {
 			setTimeout(() => {
 				this.preloaderShow = false;
-			}, 2000);
+			}, 20);
 		}
 	};
 </script>
@@ -31,5 +34,18 @@
 	@import "../../common/css/reset.css";
 	.home{
 		height: 100%;
+		width: 100%;
+		top:0;
+		position: relative;
+        &:after{
+			clear: both;
+		}
+		&:hover{
+			.slides-navigation{
+				a{
+					opacity: 0.3;
+				}
+			}
+		}
 	}
 </style>

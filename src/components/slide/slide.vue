@@ -1,8 +1,10 @@
 <template>
     <div class="slides-container">
-        <div class="slides" :style="[translateStyle, slidesWidth]" @touchmove="ignore">
+        <div class="slides" :style="[translateStyle, slidesWidth]">
             <div class="slide-1 slide-item" :style="itemWidth"></div>
             <div class="slide-2 slide-item" :style="itemWidth"></div>
+            <div class="slide-3 slide-item" :style="itemWidth"></div>
+            <div class="slide-4 slide-item" :style="itemWidth"></div>
         </div>
         <nav class="slides-navigation">
             <a href="#" class="prev" @click="prev"></a>
@@ -16,23 +18,26 @@
         data() {
             return {
                 currentPage: 0,
-                items: 2,
+                items: 4,
                 offestLeft: 0,
-                animation: '',
-                duration: 300,
-                screenWidth: 0
+                duration: 500,
+                screenWidth: 0,
+                timing: 5000,
+                autoSlide: true
             };
         },
         methods: {
             prev() {
                 let index = this.currentPage;
-                this.currentPage = index === 0 ? this.items : index - 1;
+                this.currentPage = index === 0 ? this.items - 1 : index - 1;
             },
             next() {
                 let index = this.currentPage;
                 this.currentPage = index === this.items - 1 ? 0 : index + 1;
             },
-            ignore() {}
+            ignore() {
+                console.log('touch');
+            }
         },
         computed: {
             itemWidth() {
@@ -61,6 +66,11 @@
             window.addEventListener('resize', () => {
                 this.screenWidth = this.$el.clientWidth;
             });
+            if (this.autoSlide) {
+                setInterval(() => {
+                    this.next();
+                }, this.timing);
+            }
         }
     };
 </script>
@@ -70,6 +80,7 @@
     .slides-container{
         width: 100%;
         height: 100%;
+        overflow: hidden;
         position: relative;
         &:hover{
             .slides-navigation{
@@ -93,6 +104,14 @@
 
             .slide-2{
                 background-image: url("pattern-1.png"), url("slider-img-2.jpg");
+                background-repeat: repeat, no-repeat;
+            }
+            .slide-3{
+                background-image: url("pattern-1.png"), url("slider-img-3.jpg");
+                background-repeat: repeat, no-repeat;
+            }
+            .slide-4{
+                background-image: url("pattern-1.png"), url("slider-img-4.jpg");
                 background-repeat: repeat, no-repeat;
             }
         }
