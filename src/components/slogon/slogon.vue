@@ -152,13 +152,13 @@
                     display: inline;
                     a{
                         display: inline-block;
-                        padding: 4px 0 0 1px;
                         width: 32px;
                         height: 32px;
+                        line-height: 32px;
                         margin: 0 4px;
                         background: rgba(0,0,0, .5);
                         color: #fff;
-                        radius: 3px;
+                        border-radius: 3px;
                         &:hover{
                             background: rgba(0,0,0, .7);
                             color: #e74c3c;
