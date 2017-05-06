@@ -4,7 +4,7 @@
 		<navigation :menus="menus" :currentMenu="currentMenu"></navigation>
 		<div class="container sub-page">
 			<div class="eleven columns main-content">
-				<essay :essays="essays"></essay>
+				<timeline :points="points"></timeline>
 			</div>
 			<div class="five columns offset-by-one sidebar left-align">
 				<div class="sidebar-content">
@@ -28,8 +28,8 @@ import navigation from '../../components/navigation/navigation';
 import category from '../../components/category/category';
 import search from '../../components/search/search';
 import tags from '../../components/tags/tags';
-import essay from '../../components/essay/essay';
 import vfooter from '../../components/vfooter/vfooter';
+import timeline from '../../components/timeline/timeline';
 export default {
 	data() {
 		return {
@@ -101,27 +101,57 @@ export default {
 					text: 'html'
 				}
 			],
-			essays: [
+			points: [
 				{
-					title: 'A Day in The Life of a Designer Has Lots of Freedom',
-					author: 'John Doe',
-					date: '10/15/2015',
-					comments: 3,
-					intro: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, deserunt ut consequuntur est ea dolore accusantium illo consequatur quos laudantium eum doloribus reprehenderit at? Veniam, obcaecati, facilis, ad, nihil sit eaque minus fugiat magnam perspiciatis quia rem quae consequuntur sint cumque iste.'
-				},
-				{
-					title: 'A Day in The Life of a Designer Has Lots of Freedom',
-					author: 'John Doe',
-					date: '10/15/2015',
-					comments: 3,
-					intro: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, deserunt ut consequuntur est ea dolore accusantium illo consequatur quos laudantium eum doloribus reprehenderit at? Veniam, obcaecati, facilis, ad, nihil sit eaque minus fugiat magnam perspiciatis quia rem quae consequuntur sint cumque iste.'
-				},
-				{
-					title: 'A Day in The Life of a Designer Has Lots of Freedom',
-					author: 'John Doe',
-					date: '10/15/2015',
-					comments: 3,
-					intro: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, deserunt ut consequuntur est ea dolore accusantium illo consequatur quos laudantium eum doloribus reprehenderit at? Veniam, obcaecati, facilis, ad, nihil sit eaque minus fugiat magnam perspiciatis quia rem quae consequuntur sint cumque iste.'
+                    img: '1',
+					content: [
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						}
+					],
+					date: '2017-1-1' // 时间点
+				}, {
+					img: '1', // 图片地址 可留空
+					content: [
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						}
+					],
+					date: '2017-1-1'
+				}, {
+					content: [
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						}
+					],
+					date: '2017-1-1' // 时间点
 				}
 			]
 		};
@@ -132,7 +162,7 @@ export default {
 		category,
 		search,
 		tags,
-		essay,
+        timeline,
 		vfooter
     },
 	created() {
@@ -155,19 +185,29 @@ export default {
 		padding: 64px 0;
 	}
 
-	.sub-page{
+	.sub-page {
 		padding-top: 128px;
-		.left-align{
+		.left-align {
 			text-align: left;
 			.sidebar-content{
 				margin-bottom: 48px;
 			}
+		}
+		.sidebar {
+			position: fixed;
+			right: 50px;
 		}
 	}
 
 	@media only screen and (max-width: 767px) {
 		.columns {
 			margin-bottom: 24px !important;
+		}
+		.sub-page {
+			.sidebar {
+				position: relative;
+				right: 0px;
+			}
 		}
 	}
 </style>
