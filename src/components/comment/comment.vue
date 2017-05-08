@@ -13,7 +13,7 @@
     export default {
         props: ['comments'],
         components: {
-            commentItemq
+            commentItem
         },
         name: 'comment'
     };
