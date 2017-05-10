@@ -4,18 +4,17 @@
 		<navigation :menus="menus" :currentMenu="currentMenu"></navigation>
 		<div class="container sub-page">
 			<div class="eleven columns main-content">
-				<!--<router-view></router-view>-->
-				<essay :essays="essays"></essay>
+				<router-view :essays="essays" :points="points" :comments="comments"></router-view>
 			</div>
 			<div class="five columns offset-by-one sidebar left-align">
 				<div class="sidebar-content">
-					<category :categories="categories"></category>
+					<category></category>
 				</div>
 				<div class="sidebar-content">
 					<search></search>
 				</div>
 				<div class="sidebar-content">
-                    <tags :tags="tags"></tags>
+                    <tags></tags>
 				</div>
 			</div>
 		</div>
@@ -138,6 +137,102 @@ export default {
 					comments: 3,
 					intro: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, deserunt ut consequuntur est ea dolore accusantium illo consequatur quos laudantium eum doloribus reprehenderit at? Veniam, obcaecati, facilis, ad, nihil sit eaque minus fugiat magnam perspiciatis quia rem quae consequuntur sint cumque iste.'
 				}
+			],
+			points: [
+				{
+					img: '1',
+					content: [
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						}
+					],
+					date: '2017-1-1' // 时间点
+				}, {
+					img: '1', // 图片地址 可留空
+					content: [
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						}
+					],
+					date: '2017-1-1'
+				}, {
+					content: [
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						},
+						{
+							text: '世界はそれを愛と呼ぶんだぜ',
+							link: '#'
+						}
+					],
+					date: '2017-1-1' // 时间点
+				}
+			],
+			comments: [
+				{
+					username: 'xsir',
+					email: 'xmanzc@163.com',
+					content: '夜空中最亮的星',
+					time: '2017-05-06',
+					level: 0,
+					replys: [
+						{
+							username: 'xsir',
+							email: 'xmanzc@163.com',
+							content: '夜空中最亮的星',
+							time: '2017-05-06',
+							level: 1,
+							replys: [
+								{
+									username: 'xsir',
+									email: 'xmanzc@163.com',
+									content: '夜空中最亮的星',
+									time: '2017-05-06',
+									level: 2
+								}
+							]
+						}
+					]
+				},
+				{
+					username: 'xsir',
+					email: 'xmanzc@163.com',
+					content: '夜空中最亮的星',
+					time: '2017-05-06',
+					level: 0,
+					replys: [
+						{
+							username: 'xsir',
+							email: 'xmanzc@163.com',
+							content: '夜空中最亮的星',
+							time: '2017-05-06',
+							level: 1
+						}
+					]
+				}
 			]
 		};
 	},
@@ -172,6 +267,9 @@ export default {
 
 	.sub-page {
 		padding-top: 128px;
+		.main-content {
+			min-height: 500px;
+		}
 		.left-align {
 			text-align: left;
 			.sidebar-content{

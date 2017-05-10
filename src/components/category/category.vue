@@ -2,14 +2,30 @@
     <div>
         <h4>Categories</h4>
         <ul class="blog-categories">
-            <li v-for="item in categories"><a :href="item.link">{{item.text}}</a></li>
+            <li v-for="item in categories"><a :href="item.link">{{item.name}}</a></li>
         </ul>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
+    import config from '../../common/js/config';
+
+    const queryUrl = '/category';
+    const separate = config.port === '' ? '' : ':';
     export default {
-        props: ['categories']
+        data() {
+            return {
+                categories: null
+            };
+        },
+        created() {
+            this.$http.get(config.host + separate + config.port + queryUrl).then((response) => {
+                response = response.body;
+                if (response.success) {
+                    this.categories = response.data.categories;
+                }
+            });
+        }
     };
 </script>
 

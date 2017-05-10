@@ -1,13 +1,29 @@
 <template>
     <div>
         <h4>Tags</h4>
-        <a v-for="item in tags" :href="item.link" class="blog-tag">{{item.text}}</a>
+        <a v-for="item in tags" :href="item.link" class="blog-tag">{{item.name}}</a>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
+    import config from '../../common/js/config';
+
+    const queryUrl = '/tag';
+    const separate = config.port === '' ? '' : ':';
     export default {
-        props: ['tags']
+        data() {
+          return {
+              tags: []
+          };
+        },
+        created() {
+            this.$http.get(config.host + separate + config.port + queryUrl).then((response) => {
+                response = response.body;
+                if (response.success) {
+                    this.tags = response.data.tags;
+                }
+            });
+        }
     };
 </script>
 

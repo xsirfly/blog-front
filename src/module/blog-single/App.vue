@@ -1,20 +1,23 @@
 <template>
 	<div>
         <preloader :show="preloaderShow"></preloader>
-		<navigation></navigation>
+		<navigation :menus="menus" :currentMenu="currentMenu"></navigation>
 		<div class="container sub-page">
 			<div class="eleven columns main-content">
-				<timeline :points="points"></timeline>
+                <varticle></varticle>
+				<h2 class="title">评论</h2>
+				<comment :comments="comments"></comment>
+				<replyBox :show="true"></replyBox>
 			</div>
 			<div class="five columns offset-by-one sidebar left-align">
 				<div class="sidebar-content">
-					<category></category>
+					<category :categories="categories"></category>
 				</div>
 				<div class="sidebar-content">
 					<search></search>
 				</div>
 				<div class="sidebar-content">
-                    <tags></tags>
+                    <tags :tags="tags"></tags>
 				</div>
 			</div>
 		</div>
@@ -29,64 +32,81 @@ import category from '../../components/category/category';
 import search from '../../components/search/search';
 import tags from '../../components/tags/tags';
 import vfooter from '../../components/vfooter/vfooter';
-import timeline from '../../components/timeline/timeline';
+import comment from '../../components/comment/comment';
+import replyBox from '../../components/replyBox/replyBox';
+import varticle from '../../components/varticle/varticle';
 export default {
 	data() {
 		return {
 			preloaderShow: true,
-			points: [
+			menus: [
 				{
-                    img: '1',
-					content: [
-						{
-							text: '世界はそれを愛と呼ぶんだぜ',
-							link: '#'
-						},
-						{
-							text: '世界はそれを愛と呼ぶんだぜ',
-							link: '#'
-						},
-						{
-							text: '世界はそれを愛と呼ぶんだぜ',
-							link: '#'
-						}
-					],
-					date: '2017-1-1' // 时间点
-				}, {
-					img: '1', // 图片地址 可留空
-					content: [
-						{
-							text: '世界はそれを愛と呼ぶんだぜ',
-							link: '#'
-						},
-						{
-							text: '世界はそれを愛と呼ぶんだぜ',
-							link: '#'
-						},
-						{
-							text: '世界はそれを愛と呼ぶんだぜ',
-							link: '#'
-						}
-					],
-					date: '2017-1-1'
-				}, {
-					content: [
-						{
-							text: '世界はそれを愛と呼ぶんだぜ',
-							link: '#'
-						},
-						{
-							text: '世界はそれを愛と呼ぶんだぜ',
-							link: '#'
-						},
-						{
-							text: '世界はそれを愛と呼ぶんだぜ',
-							link: '#'
-						}
-					],
-					date: '2017-1-1' // 时间点
+					link: '#',
+					text: 'home'
+				},
+				{
+					link: '#',
+					text: 'blog'
+				},
+				{
+					link: '#',
+					text: 'archive'
 				}
-			]
+			],
+			currentMenu: 1,
+			categories: [
+				{
+					link: '#',
+					text: 'Design'
+				},
+				{
+					link: '#',
+					text: 'Tutorials'
+				},
+				{
+					link: '#',
+					text: 'Photoshop'
+				},
+				{
+					link: '#',
+					text: 'Illustration'
+				},
+				{
+					link: '#',
+					text: 'Web'
+				}
+			],
+			tags: [
+				{
+					link: '#',
+					text: 'design'
+				},
+				{
+					link: '#',
+					text: 'clients'
+				},
+				{
+					link: '#',
+					text: 'photoshop'
+				},
+				{
+					link: '#',
+					text: 'web'
+				},
+				{
+					link: '#',
+					text: 'illustration'
+				},
+				{
+					link: '#',
+					text: 'tutorials'
+				},
+				{
+					link: '#',
+					text: 'html'
+				}
+			],
+			comments: []
 		};
 	},
 	components: {
@@ -95,8 +115,10 @@ export default {
 		category,
 		search,
 		tags,
-        timeline,
-		vfooter
+		comment,
+		replyBox,
+		vfooter,
+		varticle
     },
 	created() {
 		setTimeout(() => {
@@ -120,6 +142,10 @@ export default {
 
 	.sub-page {
 		padding-top: 128px;
+		.main-content {
+			min-height: 700px;
+		}
+
 		.left-align {
 			text-align: left;
 			.sidebar-content{
@@ -129,6 +155,12 @@ export default {
 		.sidebar {
 			position: fixed;
 			right: 50px;
+		}
+		.title {
+			margin: 0 0 10px 0;
+			padding: 0px;
+			text-align: left;
+			color: #000;
 		}
 	}
 

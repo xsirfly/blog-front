@@ -13,7 +13,7 @@
                 <div class="nav-menu" :style="showNav" v-if="show">
                     <ul class="nav">
                         <li v-for="(menu,index) in menus"
-                            @click="changCurrent(index)"><a :href="menu.link" :style="current(index)">{{menu.text}}</a></li>
+                            @click="changCurrent(index)"><router-link :to="menu.link" :style="current(index)">{{menu.text}}</router-link></li>
                     </ul>
                 </div>
             </transition>
@@ -23,10 +23,27 @@
 
 <script type="text/ecmascript-6">
     export default {
-        props: ['menus', 'currentMenu'],
         data() {
             return {
-                currentIndex: this.currentMenu,
+                currentIndex: 1,
+                menus: [
+                    {
+                        link: '#',
+                        text: 'home'
+                    },
+                    {
+                        link: '/essay',
+                        text: 'blog'
+                    },
+                    {
+                        link: '/archive',
+                        text: 'archive'
+                    },
+                    {
+                        link: '/message',
+                        text: 'foot'
+                    }
+                ],
                 showNav: null
             };
         },
