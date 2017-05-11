@@ -1,14 +1,14 @@
 <template>
     <div>
         <div v-for="essay in essays" class="blog-post left-align">
-            <a href="#" class="post-title">{{essay.title}}</a>
+            <router-link :to="'/article/' + essay.id" class="post-title">{{essay.title}}</router-link>
             <ul class="post-meta">
                 <li><i class="fa fa-user"></i> <a href="#">{{essay.author}}</a></li>
                 <li><i class="fa fa-calendar"></i>{{essay.date}}</li>
                 <li><i class="fa fa-comments"></i> <a href="#">{{essay.comments}}</a> comments</li>
             </ul>
-            <p>{{essay.intro}}</p>
-            <a href="">Read more &raquo;</a>
+            <p>{{essay.outline}}</p>
+            <router-link :to="'/article/' + essay.id">Read more &raquo;</router-link>
         </div>
     </div>
 </template>

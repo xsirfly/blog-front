@@ -3,14 +3,29 @@
 </template>
 
 <script type="text/ecmascript-6">
+    import config from '../../common/js/config';
+
+    const separate = config.port === '' ? '' : ':';
+    const articleUrl = '/article';
     export default {
         data() {
             return {
-                html: '<h1 id="test">test</h1>'
+                html: '<div>未获取到数据</div>',
+                articleId: this.$route.params.id
             };
         },
-        mounted() {
-            this.$refs.article.innerHTML = this.html;
+        created() {
+            this.$http.get(config.host + separate + config.port + articleUrl + '/' + this.articleId).then((response) => {
+                response = response.body;
+                if (response.success) {
+                    this.html = response.data.html;
+                }
+            });
+        },
+        watch: {
+            html(val, oldVal) {
+                this.$refs.article.innerHTML = this.html;
+            }
         }
     };
 </script>

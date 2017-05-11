@@ -6,13 +6,15 @@
         </a>
         <div class="content">
             <span class="author">{{comment.username}}</span>
+            <span class="email">{{comment.email}}</span>
             <span class="date">{{comment.time}}</span>
             <div class="text">{{comment.content}}</div>
             <div class="actions">
                 <a v-if="reply" @click="reply = !reply">回复</a>
                 <a v-if="!reply" @click="reply = !reply">取消回复</a>
             </div>
-            <replyBox :show="!reply"></replyBox>
+            <replyBox :show="!reply" :reply="comment" :comments="null" :articleId="comment.article_id"
+                      v-on:hidden="hiddenReply"></replyBox>
         </div>
     </div>
 </template>
@@ -31,6 +33,11 @@
         },
         components: {
             replyBox
+        },
+        methods: {
+            hiddenReply() {
+                this.reply = true;
+            }
         }
     };
 </script>

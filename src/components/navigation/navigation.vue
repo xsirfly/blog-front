@@ -12,8 +12,7 @@
             <transition name="menu">
                 <div class="nav-menu" :style="showNav" v-if="show">
                     <ul class="nav">
-                        <li v-for="(menu,index) in menus"
-                            @click="changCurrent(index)"><router-link :to="menu.link" :style="current(index)">{{menu.text}}</router-link></li>
+                        <li v-for="menu in menus"><router-link :to="menu.link">{{menu.text}}</router-link></li>
                     </ul>
                 </div>
             </transition>
@@ -23,40 +22,13 @@
 
 <script type="text/ecmascript-6">
     export default {
+        props: ['menus', 'currentMenu'],
         data() {
             return {
-                currentIndex: 1,
-                menus: [
-                    {
-                        link: '#',
-                        text: 'home'
-                    },
-                    {
-                        link: '/essay',
-                        text: 'blog'
-                    },
-                    {
-                        link: '/archive',
-                        text: 'archive'
-                    },
-                    {
-                        link: '/message',
-                        text: 'foot'
-                    }
-                ],
                 showNav: null
             };
         },
         methods: {
-            current(index) {
-                if (index === this.currentIndex) {
-                    return {color: '#e74c3c'};
-                }
-                return '';
-            },
-            changCurrent(index) {
-                this.currentIndex = index;
-            },
             slideToggle() {
                 if (this.showNav === null || this.showNav.display === 'none') {
                     this.showNav = {display: 'block'};
@@ -156,6 +128,9 @@
                                 padding: 12px;
                                 border-bottom: none;
                             }
+                        }
+                        .active {
+                            color: #e74c3c;
                         }
                     }
                 }

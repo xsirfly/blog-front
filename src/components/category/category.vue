@@ -8,24 +8,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import config from '../../common/js/config';
-
-    const queryUrl = '/category';
-    const separate = config.port === '' ? '' : ':';
     export default {
-        data() {
-            return {
-                categories: null
-            };
-        },
-        created() {
-            this.$http.get(config.host + separate + config.port + queryUrl).then((response) => {
-                response = response.body;
-                if (response.success) {
-                    this.categories = response.data.categories;
-                }
-            });
-        }
+        props: ['categories']
     };
 </script>
 

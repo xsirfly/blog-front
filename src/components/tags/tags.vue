@@ -6,24 +6,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import config from '../../common/js/config';
-
-    const queryUrl = '/tag';
-    const separate = config.port === '' ? '' : ':';
     export default {
-        data() {
-          return {
-              tags: []
-          };
-        },
-        created() {
-            this.$http.get(config.host + separate + config.port + queryUrl).then((response) => {
-                response = response.body;
-                if (response.success) {
-                    this.tags = response.data.tags;
-                }
-            });
-        }
+        props: ['tags']
     };
 </script>
 

@@ -2,7 +2,7 @@
     <div>
         <h2 class="title">大家的脚印</h2>
         <comment :comments="comments"></comment>
-        <replyBox :show="true"></replyBox>
+        <replyBox :show="true" :reply="null" :comments="comments" :articleId="0"></replyBox>
     </div>
 </template>
 

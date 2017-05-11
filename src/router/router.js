@@ -6,6 +6,7 @@ import VueRouter from 'vue-router';
 import essay from '../components/essay/essay';
 import timeline from '../components/timeline/timeline';
 import message from '../components/message/message';
+import varticle from '../components/varticle/varticle';
 
 Vue.use(VueRouter);
 
@@ -25,11 +26,16 @@ const routers = [
     {
         path: '/message',
         component: message
+    },
+    {
+        path: '/article/:id',
+        component: varticle
     }
 ];
 
 const router = new VueRouter({
-    routes: routers
+    routes: routers,
+    linkActiveClass: 'active'
 });
 
 export default router;

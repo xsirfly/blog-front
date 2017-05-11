@@ -8,13 +8,13 @@
 			</div>
 			<div class="five columns offset-by-one sidebar left-align">
 				<div class="sidebar-content">
-					<category></category>
+					<category :categories="categories"></category>
 				</div>
 				<div class="sidebar-content">
 					<search></search>
 				</div>
 				<div class="sidebar-content">
-                    <tags></tags>
+                    <tags :tags="tags"></tags>
 				</div>
 			</div>
 		</div>
@@ -30,77 +30,37 @@ import search from '../../components/search/search';
 import tags from '../../components/tags/tags';
 import essay from '../../components/essay/essay';
 import vfooter from '../../components/vfooter/vfooter';
+import config from '../../common/js/config';
+
+const categoryUrl = '/category';
+const tagUrl = '/tag';
+const commentUrl = '/comment';
+const articleUrl = '/article/outline';
+const separate = config.port === '' ? '' : ':';
+
 export default {
 	data() {
 		return {
 			preloaderShow: true,
 			menus: [
 				{
-					link: '#',
-					text: 'home'
-				},
-				{
-					link: 'essay',
+					link: '/essay',
 					text: 'blog'
 				},
 				{
-					link: 'archive',
+					link: '/archive',
 					text: 'archive'
+				},
+				{
+					link: '/message',
+					text: 'foot'
 				}
 			],
 			currentMenu: 1,
-			categories: [
-				{
-					link: '#',
-					text: 'Design'
-				},
-				{
-					link: '#',
-					text: 'Tutorials'
-				},
-				{
-					link: '#',
-					text: 'Photoshop'
-				},
-				{
-					link: '#',
-					text: 'Illustration'
-				},
-				{
-					link: '#',
-					text: 'Web'
-				}
-			],
-			tags: [
-				{
-					link: '#',
-					text: 'design'
-				},
-				{
-					link: '#',
-					text: 'clients'
-				},
-				{
-					link: '#',
-					text: 'photoshop'
-				},
-				{
-					link: '#',
-					text: 'web'
-				},
-				{
-					link: '#',
-					text: 'illustration'
-				},
-				{
-					link: '#',
-					text: 'tutorials'
-				},
-				{
-					link: '#',
-					text: 'html'
-				}
-			],
+			categories: [],
+			tags: [],
+			completeTask: 0,
+			tasks: 4,
 			essays: [
 				{
 					title: 'A Day in The Life of a Designer Has Lots of Freedom',
@@ -191,49 +151,7 @@ export default {
 					date: '2017-1-1' // 时间点
 				}
 			],
-			comments: [
-				{
-					username: 'xsir',
-					email: 'xmanzc@163.com',
-					content: '夜空中最亮的星',
-					time: '2017-05-06',
-					level: 0,
-					replys: [
-						{
-							username: 'xsir',
-							email: 'xmanzc@163.com',
-							content: '夜空中最亮的星',
-							time: '2017-05-06',
-							level: 1,
-							replys: [
-								{
-									username: 'xsir',
-									email: 'xmanzc@163.com',
-									content: '夜空中最亮的星',
-									time: '2017-05-06',
-									level: 2
-								}
-							]
-						}
-					]
-				},
-				{
-					username: 'xsir',
-					email: 'xmanzc@163.com',
-					content: '夜空中最亮的星',
-					time: '2017-05-06',
-					level: 0,
-					replys: [
-						{
-							username: 'xsir',
-							email: 'xmanzc@163.com',
-							content: '夜空中最亮的星',
-							time: '2017-05-06',
-							level: 1
-						}
-					]
-				}
-			]
+			comments: []
 		};
 	},
 	components: {
@@ -246,9 +164,45 @@ export default {
 		vfooter
     },
 	created() {
-		setTimeout(() => {
-			this.preloaderShow = false;
-		}, 2000);
+		this.$http.get(config.host + separate + config.port + categoryUrl).then((response) => {
+			response = response.body;
+			if (response.success) {
+				this.categories = response.data.categories;
+			}
+			this.completeTask++;
+		});
+
+		this.$http.get(config.host + separate + config.port + tagUrl).then((response) => {
+			response = response.body;
+			if (response.success) {
+				this.tags = response.data.tags;
+			}
+			this.completeTask++;
+		});
+
+		let commentParam = '?article_id=0';
+		this.$http.get(config.host + separate + config.port + commentUrl + commentParam).then((response) => {
+			response = response.body;
+			if (response.success) {
+				this.comments = response.data.comments;
+			}
+			this.completeTask++;
+		});
+
+		this.$http.get(config.host + separate + config.port + articleUrl).then((response) => {
+			response = response.body;
+			if (response.success) {
+				this.essays = response.data.articles;
+				this.completeTask++;
+			}
+		});
+	},
+	watch: {
+		completeTask(val) {
+			if (val === this.tasks) {
+				this.preloaderShow = false;
+			}
+		}
 	}
 };
 
