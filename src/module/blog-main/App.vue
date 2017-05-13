@@ -241,6 +241,9 @@ export default {
 			margin-bottom: 24px !important;
 		}
 		.sub-page {
+			.main-content {
+				min-height: 0px;
+			}
 			.sidebar {
 				position: relative;
 				right: 0px;
