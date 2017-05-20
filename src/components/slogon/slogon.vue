@@ -28,7 +28,7 @@
                 <li><a href="#"><i class="fa fa-github"></i></a></li>
             </ul>
         </div><!-- end social media links -->
-        <a href="#" class="header-down-arrow scroll link"></a>
+        <a href="/blog-main.html" class="header-down-arrow scroll link"></a>
     </div>
 </template>
 

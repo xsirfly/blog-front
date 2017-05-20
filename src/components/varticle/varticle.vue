@@ -90,11 +90,13 @@
             li {
                 list-style: decimal inside;
             }
+            margin-left: 10px;
         }
         ul {
             li {
                 list-style: disc inside;
             }
+            margin-left: 10px;
         }
     }
 </style>

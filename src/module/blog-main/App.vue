@@ -1,6 +1,6 @@
 <template>
 	<div>
-        <preloader :show="preloaderShow"></preloader>
+        <preloader :show="preloaderSho"></preloader>
 		<navigation :menus="menus" :currentMenu="currentMenu"></navigation>
 		<div class="container sub-page">
 			<div class="eleven columns main-content">
