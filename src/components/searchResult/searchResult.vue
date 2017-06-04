@@ -10,8 +10,8 @@
     export default {
         data() {
             return {
-                url: '/article/outline',
-                routeName: 'essay'
+                url: '/search',
+                routeName: 'search'
             };
         },
         components: {

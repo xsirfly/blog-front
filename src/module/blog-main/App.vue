@@ -1,10 +1,10 @@
 <template>
 	<div>
-        <preloader :show="preloaderSho"></preloader>
+        <preloader :show="preloaderShow"></preloader>
 		<navigation :menus="menus" :currentMenu="currentMenu"></navigation>
 		<div class="container sub-page">
 			<div class="eleven columns main-content">
-				<router-view :essays="essays" :points="points" :comments="comments"></router-view>
+				<router-view :points="points" :comments="comments"></router-view>
 			</div>
 			<div class="five columns offset-by-one sidebar left-align">
 				<div class="sidebar-content">
@@ -35,8 +35,6 @@ import config from '../../common/js/config';
 const categoryUrl = '/category';
 const tagUrl = '/tag';
 const commentUrl = '/comment';
-const articleUrl = '/article/outline';
-const separate = config.port === '' ? '' : ':';
 
 export default {
 	data() {
@@ -44,7 +42,7 @@ export default {
 			preloaderShow: true,
 			menus: [
 				{
-					link: '/essay',
+					link: '/essay?offset=1',
 					text: 'blog'
 				},
 				{
@@ -60,7 +58,7 @@ export default {
 			categories: [],
 			tags: [],
 			completeTask: 0,
-			tasks: 4,
+			tasks: 3,
 			essays: [
 				{
 					title: 'A Day in The Life of a Designer Has Lots of Freedom',
@@ -164,7 +162,7 @@ export default {
 		vfooter
     },
 	created() {
-		this.$http.get(config.host + separate + config.port + categoryUrl).then((response) => {
+		this.$http.get(config.host + config.separate + config.port + categoryUrl).then((response) => {
 			response = response.body;
 			if (response.success) {
 				this.categories = response.data.categories;
@@ -172,7 +170,7 @@ export default {
 			this.completeTask++;
 		});
 
-		this.$http.get(config.host + separate + config.port + tagUrl).then((response) => {
+		this.$http.get(config.host + config.separate + config.port + tagUrl).then((response) => {
 			response = response.body;
 			if (response.success) {
 				this.tags = response.data.tags;
@@ -181,20 +179,12 @@ export default {
 		});
 
 		let commentParam = '?article_id=0';
-		this.$http.get(config.host + separate + config.port + commentUrl + commentParam).then((response) => {
+		this.$http.get(config.host + config.separate + config.port + commentUrl + commentParam).then((response) => {
 			response = response.body;
 			if (response.success) {
 				this.comments = response.data.comments;
 			}
 			this.completeTask++;
-		});
-
-		this.$http.get(config.host + separate + config.port + articleUrl).then((response) => {
-			response = response.body;
-			if (response.success) {
-				this.essays = response.data.articles;
-				this.completeTask++;
-			}
 		});
 	},
 	watch: {

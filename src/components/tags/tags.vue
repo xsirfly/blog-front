@@ -1,7 +1,7 @@
 <template>
     <div>
         <h4>Tags</h4>
-        <a v-for="item in tags" :href="item.link" class="blog-tag">{{item.name}}</a>
+        <router-link v-for="item in tags" :to="item.link" class="blog-tag" key="item.name">{{item.name}}</router-link>
     </div>
 </template>
 

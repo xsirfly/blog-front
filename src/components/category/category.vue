@@ -2,7 +2,9 @@
     <div>
         <h4>Categories</h4>
         <ul class="blog-categories">
-            <li v-for="item in categories"><a :href="item.link">{{item.name}}</a></li>
+            <li v-for="item in categories">
+                <router-link :to="item.link" key="item.name">{{item.name}}</router-link>
+            </li>
         </ul>
     </div>
 </template>

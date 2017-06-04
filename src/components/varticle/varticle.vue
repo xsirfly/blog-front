@@ -1,6 +1,6 @@
 <template>
     <div id="article">
-        <div href="#" class="post-title">标准模板库自修教程读书笔记-2-stl组件概述</div>
+        <div href="#" class="post-title">{{article === null ? '' : article.title}}</div>
         <div v-article="html"></div>
         <div>
             <h2>Comments</h2>
@@ -25,6 +25,7 @@
             return {
                 html: '<div>未获取到数据</div>',
                 articleId: this.$route.params.id,
+                article: null,
                 comments: []
             };
         },
@@ -36,7 +37,8 @@
             this.$http.get(config.host + separate + config.port + articleUrl + '/' + this.articleId).then((response) => {
                 response = response.body;
                 if (response.success) {
-                    this.html = response.data.html;
+                    this.article = response.data.article;
+                    this.html = response.data.article.html;
                 }
             });
 
@@ -46,7 +48,6 @@
                 if (response.success) {
                     this.comments = response.data.comments;
                 }
-                this.completeTask++;
             });
         },
         directives: {

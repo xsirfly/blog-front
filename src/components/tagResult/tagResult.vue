@@ -10,8 +10,8 @@
     export default {
         data() {
             return {
-                url: '/article/outline',
-                routeName: 'essay'
+                url: '/article/tag',
+                routeName: 'tag'
             };
         },
         components: {
@@ -21,4 +21,5 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+
 </style>
