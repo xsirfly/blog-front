@@ -2,7 +2,7 @@
     <div id="navigation">
         <div class="nav-container">
             <div class="site-logo">
-                <a href="/index.html" class="scroll">
+                <a href="/blog/index.html" class="scroll">
                     <img src="static/images/site-logo.png" alt="logo">
                 </a>
             </div>

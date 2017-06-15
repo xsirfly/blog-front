@@ -3,7 +3,7 @@
         <h4>Categories</h4>
         <ul class="blog-categories">
             <li v-for="item in categories">
-                <router-link :to="item.link" key="item.name">{{item.name}}</router-link>
+                <router-link :to="getLink(item)" key="item.name">{{item.name}}</router-link>
             </li>
         </ul>
     </div>
@@ -11,7 +11,13 @@
 
 <script type="text/ecmascript-6">
     export default {
-        props: ['categories']
+        props: ['categories'],
+        methods: {
+            getLink(item) {
+                let link = `/category?query=${item.id}&offset=1`;
+                return link;
+            }
+        }
     };
 </script>
 

@@ -1,5 +1,6 @@
 <template>
     <div id="article">
+        <preloader :show="preloaderShow"></preloader>
         <div href="#" class="post-title">{{article === null ? '' : article.title}}</div>
         <div v-article="html"></div>
         <div>
@@ -15,9 +16,9 @@
     import hljs from 'highlight.js';
     import comment from '../../components/comment/comment';
     import replyBox from '../../components/replyBox/replyBox';
+    import preloader from '../../components/preloader/preloader';
     import 'highlight.js/styles/monokai-sublime.css';
 
-    const separate = config.port === '' ? '' : ':';
     const articleUrl = '/article';
     const commentUrl = '/comment';
     export default {
@@ -26,15 +27,18 @@
                 html: '<div>未获取到数据</div>',
                 articleId: this.$route.params.id,
                 article: null,
-                comments: []
+                comments: [],
+                preloaderShow: true
             };
         },
         components: {
             comment,
-            replyBox
+            replyBox,
+            preloader
         },
         created() {
-            this.$http.get(config.host + separate + config.port + articleUrl + '/' + this.articleId).then((response) => {
+            this.preloaderShow = true;
+            this.$http.get(config.host + articleUrl + '/' + this.articleId).then((response) => {
                 response = response.body;
                 if (response.success) {
                     this.article = response.data.article;
@@ -43,11 +47,12 @@
             });
 
             let commentParam = '?article_id=' + this.articleId;
-            this.$http.get(config.host + separate + config.port + commentUrl + commentParam).then((response) => {
+            this.$http.get(config.host + commentUrl + commentParam).then((response) => {
                 response = response.body;
                 if (response.success) {
                     this.comments = response.data.comments;
                 }
+                this.preloaderShow = false;
             });
         },
         directives: {

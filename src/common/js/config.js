@@ -2,7 +2,6 @@
  * Created by zhangcong on 2017/5/10.
  */
 export default {
-    host: 'http://127.0.0.1',
-    port: '8081',
-    separate: this.port === '' ? '' : ':'
+    host: 'http://74.121.151.64:8080/blogback'
+    // host: 'http://localhost:8081'
 };

@@ -56,7 +56,7 @@
     },
     created() {
       this.preloaderShow = true;
-      this.$http.get(config.host + config.separate + config.port + archiveUrl).then((response) => {
+      this.$http.get(config.host + archiveUrl).then((response) => {
         response = response.body;
         if (response.success) {
           this.archive = response.data.archive;

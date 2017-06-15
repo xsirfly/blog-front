@@ -162,7 +162,7 @@ export default {
 		vfooter
     },
 	created() {
-		this.$http.get(config.host + config.separate + config.port + categoryUrl).then((response) => {
+		this.$http.get(config.host + categoryUrl).then((response) => {
 			response = response.body;
 			if (response.success) {
 				this.categories = response.data.categories;
@@ -170,7 +170,7 @@ export default {
 			this.completeTask++;
 		});
 
-		this.$http.get(config.host + config.separate + config.port + tagUrl).then((response) => {
+		this.$http.get(config.host + tagUrl).then((response) => {
 			response = response.body;
 			if (response.success) {
 				this.tags = response.data.tags;
@@ -179,7 +179,7 @@ export default {
 		});
 
 		let commentParam = '?article_id=0';
-		this.$http.get(config.host + config.separate + config.port + commentUrl + commentParam).then((response) => {
+		this.$http.get(config.host + commentUrl + commentParam).then((response) => {
 			response = response.body;
 			if (response.success) {
 				this.comments = response.data.comments;

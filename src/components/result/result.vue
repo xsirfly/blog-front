@@ -56,13 +56,13 @@
                     q = '/' + query;
                 }
                 paginate = 'offset=' + offset + '&limit=' + this.limit;
-                this.$http.get(config.host + config.separate + config.port + this.url + q + '/count').then((response) => {
+                this.$http.get(config.host + this.url + q + '/count').then((response) => {
                     response = response.body;
                     if (response.success) {
                         this.count = response.data.count;
                     }
                 });
-                this.$http.get(config.host + config.separate + config.port + this.url + q + '?' + paginate).then((response) => {
+                this.$http.get(config.host + this.url + q + '?' + paginate).then((response) => {
                     response = response.body;
                     if (response.success) {
                         this.essays = response.data.articles || response.data.results;

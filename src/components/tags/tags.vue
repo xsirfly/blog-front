@@ -1,13 +1,19 @@
 <template>
     <div>
         <h4>Tags</h4>
-        <router-link v-for="item in tags" :to="item.link" class="blog-tag" key="item.name">{{item.name}}</router-link>
+        <router-link v-for="item in tags" :to="getLink(item)" class="blog-tag" key="item.name">{{item.name}}</router-link>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
     export default {
-        props: ['tags']
+        props: ['tags'],
+        methods: {
+            getLink(item) {
+                let link = `/tag?query=${item.id}&offset=1`;
+                return link;
+            }
+        }
     };
 </script>
 

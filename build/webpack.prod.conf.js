@@ -96,6 +96,8 @@ if (config.build.bundleAnalyzerReport) {
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
+module.exports = webpackConfig
+
 var pages = utils.getEntries('./src/module/**/*.html')
 for(var page in pages) {
   // 配置生成的html文件，定义路径等
@@ -115,4 +117,4 @@ for(var page in pages) {
   module.exports.plugins.push(new HtmlWebpackPlugin(conf))
 }
 
-module.exports = webpackConfig
+
